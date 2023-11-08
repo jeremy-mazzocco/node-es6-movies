@@ -1,20 +1,43 @@
 const data = [
     {
-        title: 'Jaws',
-        year: 1975,
-        genre: 'Drama',
-        rating: 8,
+        title: 'The Godfather',
+        year: 1972,
+        genre: 'Crime',
+        rating: 9.2,
         type: 'movie'
     },
     {
-        title: 'Breaking Bad',
-        year: 2008,
-        genre: 'Drama',
-        rating: 9.5,
+        title: 'Game of Thrones',
+        year: 2011,
+        genre: 'Fantasy',
+        rating: 9.3,
         type: 'tv',
-        seasons: 5
+        seasons: 8
+    },
+    {
+        title: 'Inception',
+        year: 2010,
+        genre: 'Science Fiction',
+        rating: 8.8,
+        type: 'movie'
+    },
+    {
+        title: 'Stranger Things',
+        year: 2016,
+        genre: 'Science Fiction',
+        rating: 8.7,
+        type: 'tv',
+        seasons: 4
+    },
+    {
+        title: 'The Shawshank Redemption',
+        year: 1994,
+        genre: 'Drama',
+        rating: 9.3,
+        type: 'movie'
     }
 ];
+
 
 // Movie class
 class Movie {
@@ -38,7 +61,7 @@ class TvSeries extends Movie {
 
     constructor(title, year, genre, rating, seasons) {
 
-        super(title, year, genre, rating, 'tv');
+        super(title, year, genre, rating);
         this.seasons = seasons;
     }
 
@@ -73,4 +96,28 @@ function averageRatingByGenre(movies, genre) {
     return totalRating / filteredMovies.length;
 }
 
+// Generi unici
+function uniqueGenres(movies) {
+    const uniqueGenres = [];
+    movies.forEach(movie => {
+        if (!uniqueGenres.includes(movie.genre)) {
+            uniqueGenres.push(movie.genre);
+        }
+    });
+    return uniqueGenres;
+}
 
+// 
+function filterMoviesByGenre(movies, genre) {
+    const filteredMovies = movies.filter(movie => movie.genre === genre);
+    return filteredMovies.map(movie => movie.toString());
+}
+
+const dramaMovies = filterMoviesByGenre(movieInstances, 'Drama');
+
+
+
+console.log('Film di genere Drama:', dramaMovies);
+console.log(movieInstances.map(movie => movie.toString()));
+console.log('Media dei voti dei film di genere Drama:', averageRatingByGenre(movieInstances, 'Drama'));
+console.log('Generi unici:', uniqueGenres(movieInstances));
